@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Lorem';
+  src: url('./fonts/15550.ttf');
+}
+
+@font-face {
+  font-family: 'Ipsum';
+  src: url('./fonts/15545.ttf');
+}
+
+@font-face {
+  font-family: 'Domet';
+  src: url('./fonts/15542.ttf');
+}
