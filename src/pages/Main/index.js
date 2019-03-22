@@ -1,26 +1,34 @@
 import React, { Component } from 'react'
-import { Container, Grid } from 'semantic-ui-react'
+import { indexOf } from 'lodash'
+import { Container, Grid, Input } from 'semantic-ui-react'
 import './style.css'
 import fonts from '../../res/fonts'
 import Header from '../../containers/Header'
 import FontCardList from '../../containers/FontCardList'
 import FilterForm from '../../containers/FilterForm'
+import FilterdList from '../../components/FilteredList'
 
 const { Row, Column } = Grid
 
 export default class Main extends Component {
   state = {
-    exampleText: 'Съешь еще этих мягких французских булок да выпей чаю',
+    exampleText: 'Съешь этих мягких французских булок',
     name: '',
-    ucsRequired: false,
-    allCyrillicSymbols: false,
-    hasLatinicSymbols: false,
-    handWriting: false,
-    typografy: false,
+    properties: [],
   }
 
+  onChangeExampleInput = (e, { value }) => {
+    this.setState({ exampleText: value })
+  }
   handleChangeChechbox = (e, { name }) => {
-    this.setState({ [name]: !this.state[name] })
+    const index = indexOf(this.state.properties, name)
+    if (index < 0) {
+      this.setState({ properties: [...this.state.properties, name] })
+    } else {
+      const newPropperties = this.state.properties
+      newPropperties.splice(index, 1)
+      this.setState({ properties: newPropperties })
+    }
   }
 
   handleChangeName = (e, { name, value }) => {
@@ -28,6 +36,11 @@ export default class Main extends Component {
   }
 
   render() {
+    const fontProperties = {
+      name: this.state.name,
+      properties: this.state.properties,
+    }
+
     return (
       <>
         <Header />
@@ -36,9 +49,19 @@ export default class Main extends Component {
             <Row>
               <Column width={11}>
                 <Container>
-                  <FontCardList
-                    fonts={fonts}
+                  <Input
+                    fluid
+                    className="input-example"
+                    size="massive"
+                    placeholder="Введите текст..."
+                    onChange={this.onChangeExampleInput}
+                    value={this.state.exampleText}
+                  />
+                  <FilterdList
+                    Component={FontCardList}
+                    list={fonts}
                     exampleText={this.state.exampleText}
+                    properties={fontProperties}
                   />
                 </Container>
               </Column>

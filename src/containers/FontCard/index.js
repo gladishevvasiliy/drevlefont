@@ -12,7 +12,7 @@ const FontCard = ({ font, exampleText }) => (
             <p className="example" style={{ fontFamily: font.name }}>
               {exampleText}
             </p>
-            <Card.Meta>{font.tags.join(', ')}</Card.Meta>
+            {/* <Card.Meta>{font.properties.join(', ')}</Card.Meta> */}
           </Column>
           <Column width={2} textAlign="center" verticalAlign="middle">
             <a href={font.url}>

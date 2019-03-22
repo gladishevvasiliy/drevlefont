@@ -5,9 +5,8 @@ const Header = () => (
   <Menu fixed="top" inverted>
     <Container>
       <Menu.Item as="a" header>
-        Project Name
+        DrevleFont
       </Menu.Item>
-      <Menu.Item as="a">Home</Menu.Item>
     </Container>
   </Menu>
 )
